@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OneBadAppleFrameEveryday</title>
+    <title>Image Carousel</title>
     <style>
         body {
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
@@ -46,9 +47,15 @@
         .buttons button:hover {
             background-color: rgba(0, 0, 0, 0.7);
         }
+        .counter {
+            margin-bottom: 10px;
+            font-size: 18px;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
+    <div class="counter" id="counter"></div>
     <div class="carousel">
         <div class="buttons">
             <button id="prevBtn">&lt;</button>
@@ -58,8 +65,9 @@
     </div>
 
     <script>
-        const totalImages = 221; // Total number of images
+        const totalImages = 6000; // Total number of images
         const imageContainer = document.getElementById('imageContainer');
+        const counter = document.getElementById('counter');
         const startDate = new Date('2025-02-15'); // Start date
         const currentDate = new Date(); // Current date
         const diffTime = Math.abs(currentDate - startDate);
@@ -86,6 +94,8 @@
             }
             loadImage(index);
             document.getElementById(`img-${index}`).classList.add('active');
+            counter.innerHTML = `Day: ${diffDays + 1}<br>Image: output_${String(index + 1).padStart(4, '0')}.jpg`;
+            counter.style.textAlign = 'center';
         }
 
         document.getElementById('prevBtn').addEventListener('click', () => {
