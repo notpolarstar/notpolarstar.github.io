@@ -65,12 +65,13 @@
     </div>
 
     <script>
+        const daysMissed = 1; // Number of days missed
         const totalImages = 219; // Total number of images
         const imageContainer = document.getElementById('imageContainer');
         const counter = document.getElementById('counter');
         const startDate = new Date('2025-02-15'); // Start date
         const currentDate = new Date(); // Current date
-        const diffTime = Math.abs(currentDate - startDate);
+        const diffTime = Math.abs(currentDate - startDate) - daysMissed * 24 * 60 * 60 * 1000; // Difference in milliseconds
         const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24)); // Number of days since start date
         let currentIndex = diffDays % totalImages; // Default image index based on the number of days
 
@@ -94,7 +95,7 @@
             }
             loadImage(index);
             document.getElementById(`img-${index}`).classList.add('active');
-            counter.innerHTML = `Day: ${diffDays + 1}<br>Image: output_${String(index + 1).padStart(4, '0')}.jpg`;
+            counter.innerHTML = `Day: ${diffDays + 1}<br>Days Missed: ${daysMissed}<br>Image: output_${String(index + 1).padStart(4, '0')}.jpg`;
             counter.style.textAlign = 'center';
         }
 
